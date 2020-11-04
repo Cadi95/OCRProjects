@@ -41,7 +41,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				}
 				reader.close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				e.printStackTrace(); 
 			}
 		}
 		
@@ -57,7 +57,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	public static void comptageSymptomes () throws Exception{
 	
-		BufferedReader reader = new BufferedReader (new FileReader("/Users/cadigrace/Desktop/Test/symptoms.txt"));
+		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
 		String line = reader.readLine();
 		
 		Map<String, Integer> SymptomsCount = new HashMap<>();
@@ -75,10 +75,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				//récupère la valeur du symptome et lui ajoute 1
 				SymptomsCount.replace(line,count +1);
 				
-				//si le symptôme n'a pas encore de valeur, il est initialisé avec la valeur 1
-			} else {
+				
+			} 
+			//si le symptôme n'a pas encore de valeur, il est initialisé avec la valeur 1
+			else {
 				SymptomsCount.put(line, 1);
-				//si le symptôme n'a pas encore de valeur, il est initialisé avec la valeur 1
+				
 				
 			}
 			line=reader.readLine();
@@ -102,7 +104,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				System.out.println("voyons ce que ça donne: " + symptomList);
 				
 				// next generate output
-				FileWriter writer = new FileWriter ("/Users/cadigrace/Desktop/Test/result.out");
+				FileWriter writer = new FileWriter ("result.out");
 				
 				//.keySet --> retourne une vue d'ensemble des clés contenues dans le Map
 				for (String symptom: symptomList){ 
