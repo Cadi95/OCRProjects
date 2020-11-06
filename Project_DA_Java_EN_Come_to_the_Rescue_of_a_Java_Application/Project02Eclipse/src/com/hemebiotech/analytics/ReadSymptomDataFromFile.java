@@ -22,6 +22,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	 * 
 	 * @param filepath a full or partial path to file with symptom strings in it, one per line
 	 */
+	/* Constructeur et fonction non utilisés dans cette première version de l'application
 	public ReadSymptomDataFromFile (String filepath) {
 		this.filepath = filepath;
 	}
@@ -46,7 +47,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		}
 		
 		return result;
-	}
+	}*/
 
 	/**
 	 * La fonction comptageSymptome est la fonction qui va récupérer les symptômes ligne par ligne et y associer un nombre 
@@ -60,45 +61,45 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
 		String line = reader.readLine();
 		
-		Map<String, Integer> SymptomsCount = new HashMap<>();
+		Map<String, Integer> symptomsCount = new HashMap<>();
 		
 		while (line != null) {
 			
 			System.out.println("symptom from file: " + line);
 			
 			
-			if (SymptomsCount.containsKey(line)) {
+			if (symptomsCount.containsKey(line)) {
 				//incrémenter le compteur pour ce symptome
 				//.get récupère la valeur à laquelle ce symptome est associé
-				Integer count = SymptomsCount.get(line);
+				Integer count = symptomsCount.get(line);
 				
 				//récupère la valeur du symptome et lui ajoute 1
-				SymptomsCount.replace(line,count +1);
+				symptomsCount.replace(line,count +1);
 				
 				
 			} 
 			//si le symptôme n'a pas encore de valeur, il est initialisé avec la valeur 1
 			else {
-				SymptomsCount.put(line, 1);
+				symptomsCount.put(line, 1);
 				
 				
 			}
 			line=reader.readLine();
 		}
 		reader.close();
-		ordonnerListe(SymptomsCount);
+		ordonnerListe(symptomsCount);
 	}
 	/**
 	 * La fonction ordonnerListe récupère la map SymptomsCount, la converti en liste puis ordonne cette liste par 
 	 * ordre alphabétique
-	 * @param SymptomsCount: map contenant les symptômes et le nombre d'occurence associé
+	 * @param symptomsCount: map contenant les symptômes et le nombre d'occurence associé
 	 * @throws Exception
 	 * @see comptageSymptomes
 	 */
-	public static void ordonnerListe(Map<String,Integer> SymptomsCount)throws Exception{
+	public static void ordonnerListe(Map<String,Integer> symptomsCount)throws Exception{
 		
 		// conversion de la map en liste
-				List <String> symptomList=new ArrayList<>(SymptomsCount.keySet());
+				List <String> symptomList=new ArrayList<>(symptomsCount.keySet());
 				// trier la liste par ordre alphabétique
 				Collections.sort(symptomList);
 				System.out.println("voyons ce que ça donne: " + symptomList);
@@ -108,7 +109,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				
 				//.keySet --> retourne une vue d'ensemble des clés contenues dans le Map
 				for (String symptom: symptomList){ 
-					 writer.write(symptom + " : " + SymptomsCount.get(symptom) + "\n");
+					 writer.write(symptom + " : " + symptomsCount.get(symptom) + "\n");
 				}
 				
 				writer.close();
